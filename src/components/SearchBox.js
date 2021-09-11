@@ -5,20 +5,21 @@ export default function SearchBox() {
 
   useEffect(() => {
     console.log(search);
-  }, [search]);
+  }, []);
 
   return (
-    <form className='search-form' action=''>
+    <form className='search-form mt-2' action=''>
       <i className='fa fa-search'></i>
       <input
-        id='search'
-        type='text'
+        type='text' 
+        className='search p-2'
         placeholder='Search albums..'
         value=''
         onChange={(e) => setSearch(e.target.value)}
       />
       <button
         type='submit' 
+        className='p-2'
         onClick={(e) => {
           e.preventDefault();
         }}>
