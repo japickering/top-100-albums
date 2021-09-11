@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 export default function SearchBox() {
-  const { search, setSearch } = useState('');
+  const [ search, setSearch ] = useState('');
 
   useEffect(() => {
     console.log(search);
