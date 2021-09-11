@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { API_URL } from './config';
 import './App.css';
+import './styles/flex.css';
+import './styles/colours.css';
+import './styles/spacing.css';
 
 import SearchBox from './components/SearchBox';
+import Spinner from './components/Spinner';
 
 function formatAlbumResults(obj) {
   // console.log(obj);
@@ -37,11 +41,12 @@ async function loadAlbums(context) {
     if (Object.hasOwnProperty.call(json, key)) {
       const outer = json[key];
       entry = outer.entry;
-      // console.log(entry);
+      console.log(entry);
       const results = formatAlbumResults(entry);
-      context.setState({ 
-        results: results, 
-        filtered: results, 
+      context.setState({
+        results: results,
+        filtered: results,
+        // loading: false
       });
       break;
     }
@@ -51,7 +56,9 @@ async function loadAlbums(context) {
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      loading: true
+    };
   }
 
   componentDidMount() {
@@ -59,32 +66,33 @@ export default class App extends Component {
   }
 
   render() {
-    const { filtered } = this.state;
+    const { loading, filtered } = this.state;
     return (
-      <div className='container m-2'>
-        <div className='m-3'>
-          <h1 className='title text-light'>Top 100 Albums</h1>
+      <div className='container background-midgrey'>
+        <header className='header p-3'>
+          <h1 className='text-lightgrey'>Music Library</h1>
           <SearchBox />
-        </div>
+        </header>
+        {loading && <Spinner />}
         {filtered !== undefined && (
-          <div className='results'>
+          <div className='results flex mt-1'>
             {filtered.map((item) => {
               return (
-                <div key={item.id} className='card border-thin mt-2 mb-2 ml-2 p-3'>
-                  <div className='title m-2'>
-                    <h3 className='title text-center'>{item.title}</h3>
+                <div key={item.id} className='card background-light mt-2 mb-2 ml-2 p-2'>
+                  <div className='card-header m-2 pb-2'>
+                    <h3 className='text-lightgrey'>{item.artist}</h3>
                   </div>
                   <img src={item.image2} alt='' className='thumbnail rounded' />
-                  <div className='m-2'>
-                    <span>Category: {item.category}</span>
-                  </div>
-                  <div className='m-2'>
-                    <span>Release date: {item.releaseDate}</span>
-                  </div>
-                  <div className='m-2'>
-                    <span>
-                      Price: {item.amount} {item.currency}
-                    </span>
+                  <div className='card-footer m-2 pb-2'>
+                    <div className='m-2'>
+                      <span className='text-midgrey'>Category:</span> {item.category}
+                    </div>
+                    <div className='m-2'>
+                      <span className='text-midgrey'>Release date:</span> {item.releaseDate}
+                    </div>
+                    <div className='m-2'>
+                      <span className='text-midgrey'>Price:</span> {item.amount} {item.currency}
+                    </div>
                   </div>
                 </div>
               );

@@ -1,0 +1,47 @@
+.background-dark {
+  background-color: #333;
+}
+
+.background-light {
+  background-color: #eee;
+}
+
+.background-midgrey {
+  background-color: #888;
+}
+
+.text-dark {
+  color: #333;
+}
+
+.text-light {
+  color: #eee;
+}
+
+.text-darkgrey {
+  color: #666;
+}
+
+.text-midgrey {
+  color: #888;
+}
+
+.text-lightgrey {
+  color: #a2a2a2;
+}
+
+.border {
+  border: 1px solid;
+}
+
+.border-thin {
+  border: 1px solid whitesmoke;
+}
+
+.border-grey {
+  border: 1px solid grey;
+}
+
+.border-2 {
+  border: 2px solid;
+}
