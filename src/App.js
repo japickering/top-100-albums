@@ -130,7 +130,7 @@ export default class App extends Component {
 									<a href={item.link} rel={item.rel}>
 										<img
 											src={item.image2}
-											alt=""
+											alt={item.name}
 											className="thumbnail rounded"
 										/>
 									</a>
@@ -156,7 +156,7 @@ export default class App extends Component {
 					</div>
 				)}
 				<footer className="footer p-3">
-					<h4 className="text-lightgrey">&copy;ACME Co 2021</h4>
+					<h4 className="text-lightgrey">Music Search 2021</h4>
 				</footer>
 			</div>
 		);
