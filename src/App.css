@@ -19,7 +19,7 @@ blockquote {
   font-weight: normal;
 }
 
-blockquote::before, 
+blockquote::before,
 blockquote::after {
   content: "''";
 }
@@ -56,22 +56,37 @@ a:focus {
   cursor: pointer;
 }
 
-form {
-  display: block;
+.home,
+.home:hover,
+.home:focus {
+	text-decoration: none;
 }
 
-button[type='submit'] {
-  display: inline-block;
-  margin-left: 4px;
+button {
+	display: inline-block;
   border: 1px solid transparent;
-  background-color: rgb(32, 167, 43);
-  color: #fff;
-  outline: 0;
-  border-radius: .2rem;
+	outline: 0;
   cursor: pointer;
 }
 
-button[type='submit']:focus, 
+button.tag {
+	margin-left: 4px;
+	padding: 4px 10px;
+	border: 1px solid #6ca12b;
+	background-color: #000;
+	color: #fff;
+	border-radius: .2rem;
+}
+
+button[type='submit'] {
+	margin-left: 4px;
+  border: 1px solid transparent;
+  background-color: rgb(32, 167, 43);
+  color: #fff;
+  border-radius: .2rem;
+}
+
+button[type='submit']:focus,
 button[type='submit']:hover {
   background-color: rgb(32, 151, 42);
 }
@@ -82,33 +97,8 @@ button[type='submit']:hover {
   cursor: default !important;
 }
 
-input[type='search'],
-input[type='text'] {
-  min-width: 250px;
-  margin: 2px;
-  padding: 10px;
-  border: 1px solid transparent;
-  color: #333;
-}
-
-/* input[type='text']:hover,
-input[type='text']:focus {
-  border: 1px solid transparent;
-} */
-
-.container {
+form {
   display: block;
-  width: 100%;
-}
-
-.header, .footer {
-  display: block;
-  width: 100%;
-  background-color: #000;
-}
-
-.header {
-  display: flex;
 }
 
 .search-form {
@@ -117,16 +107,38 @@ input[type='text']:focus {
   text-align: left;
 }
 
+input[type='search'],
+input[type='text'] {
+  min-width: 250px;
+  margin: 2px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+	padding-left: 30px;
+  border: 1px solid transparent;
+  color: #333;
+}
+
 .search-box-icon {
   position: absolute;
   width: 16px;
   height: 16px;
   top: 50%;
-  right: 25%;
+  left: 0%;
   transform: translateY(-50%);
   -webkit-margin-start: 10px;
   margin-inline-start: 10px;
   z-index: 1;
+}
+
+.container {
+  display: block;
+  width: 100%;
+}
+
+.header, .footer, .trending {
+  display: block;
+  width: 100%;
+  background-color: #000;
 }
 
 .content {
