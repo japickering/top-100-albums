@@ -5,16 +5,30 @@
   margin-bottom: 10px;
   border-radius: .75rem;
   box-shadow: 8px 8px 15px rgba(130, 130, 130, 0.3);
-  opacity: 1;
 }
 
-.card img:hover,
-.card img:focus {
-  opacity: 0.8;
-}
-
-.thumbnail {
+.card .thumbnail {
   max-width: 170px;
+	border: 1px solid transparent;
+  opacity: 1;
+	transition: opacity .5s;
+}
+
+.card .thumbnail:hover,
+.card .thumbnail:focus {
+  opacity: 0.7;
+}
+
+.icon-external {
+	display: none;
+	margin: 0px 0px 0px 8px;
+	width: 18px;
+	height: 18px;
+}
+
+.card .external:hover .icon-external,
+.card .external:hover .icon-external {
+	display: inline-block;
 }
 
 .card .badge {

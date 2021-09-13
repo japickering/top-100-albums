@@ -5,8 +5,12 @@ import "./styles/layout.css";
 import "./styles/card.css";
 import "./styles/colours.css";
 
+import externalIcon from "./icons/external.svg";
+
+// components
 import SearchBox from "./components/SearchBox";
 import Spinner from "./components/Spinner";
+import LikeIcon from "./components/LikeIcon";
 
 function formatAlbumResults(obj) {
 	const entries = [];
@@ -26,7 +30,6 @@ function formatAlbumResults(obj) {
 			name: el["im:name"].label,
 			artist: { label: el["im:artist"].label, link: link },
 			category: el.category.attributes.label,
-			rel: el.link.attributes.rel,
 			rights: el.rights.label,
 			releaseDate: el["im:releaseDate"].attributes.label,
 			datestamp: el["im:releaseDate"].label,
@@ -68,9 +71,11 @@ export default class App extends Component {
 		this.state = {
 			results: [],
 			filtered: [],
+			faves: [],
 			loading: true,
 		};
 		this.searchResults = this.searchResults.bind(this);
+		this.onClickLike = this.onClickLike.bind(this);
 	}
 
 	componentDidMount() {
@@ -96,8 +101,20 @@ export default class App extends Component {
 		}
 	}
 
+	onClickLike(e, label) {
+		e.preventDefault();
+		const tmp = this.state.faves;
+		if(!this.state.faves.includes(label)) {
+			tmp.push(label);
+			tmp.sort();
+			this.setState({ faves: tmp })
+		} else {
+			return;
+		}
+	}
+
 	render() {
-		const { loading, filtered } = this.state;
+		const { loading, filtered, faves } = this.state;
 		return (
 			<div className="container bg-light">
 				<header className="header flex p-3">
@@ -107,16 +124,22 @@ export default class App extends Component {
 					<SearchBox searchResults={this.searchResults} />
 				</header>
 
-				{/* <div className="trending pb-2 pl-2">
-					<span className="text-light">Trending:</span>
-					<button className="tag"
-						onClick={(e) => {
-							e.preventDefault();
-							this.searchResults('Aliyah');
-						}}>
-						Aliyah
-					</button>
-				</div> */}
+				<div className="trending pb-2 pl-3">
+					<span className="text-light">Favourites</span>
+					{faves.length > 0 && (
+						faves.map((item) => {
+							return (
+								<button key={item} className="tag"
+									onClick={(e) => {
+										e.preventDefault();
+										this.searchResults(item);
+									}}>
+									{item}
+								</button>
+							);
+						})
+					)}
+				</div>
 
 				{loading && <Spinner />}
 				{filtered.length > 0 && (
@@ -127,19 +150,31 @@ export default class App extends Component {
 									key={item.id}
 									className="card border-light bg-light mt-2 mb-2 ml-3 p-3"
 								>
-									<a href={item.link} rel={item.rel}>
+									<a href={item.link} className="external" rel="noreferrer" target="_blank">
 										<img
 											src={item.image2}
-											alt={item.name}
 											className="thumbnail rounded"
+											alt={item.name}
+										/>
+										<img
+											src={externalIcon}
+											className="icon-external"
+											alt="View on Apple Music store"
 										/>
 									</a>
 									<div className="card-header m-2 pb-2">
 										<h3 className="text-dark">{item.name}</h3>
 									</div>
 									<div className="m-2 pb-2">
-										<a href={item.artist.link} rel="noreferrer" target="_blank">
-											<h3 className="text-success">{item.artist.label}</h3>
+										<a href={item.artist.link} className="external" rel="noreferrer" target="_blank">
+											<h3 className="text-success">
+												{item.artist.label}
+												<img
+													src={externalIcon}
+													className="icon-external"
+													alt="View on Apple Music store"
+														/>
+											</h3>
 										</a>
 									</div>
 									<div className="card-footer mt-2 pb-2">
@@ -148,6 +183,16 @@ export default class App extends Component {
 										</div>
 										<div className="m-2">
 											<span className="text-midgrey">{item.releaseDate}</span>
+										</div>
+
+										<div className="m-2">
+											<button
+												key={item}
+												className={this.state.faves.includes(item.artist.label) ? "like active" : "like" }
+												onClick={(e) => this.onClickLike(e, item.artist.label)}
+											>
+												<LikeIcon />
+											</button>
 										</div>
 									</div>
 								</div>

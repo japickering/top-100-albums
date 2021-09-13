@@ -5,10 +5,11 @@ export default function Spinner() {
 	return (
 		<div className="spinner">
 			<svg
-				width="40px"
-				height="40px"
-				viewBox="0 0 50 50"
 				xmlns="http://www.w3.org/2000/svg"
+				version="1.1"
+				width="40"
+				height="40"
+				viewBox="0 0 50 50"
 			>
 				<path
 					fill="#000"

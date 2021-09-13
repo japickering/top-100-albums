@@ -71,11 +71,19 @@ button {
 
 button.tag {
 	margin-left: 4px;
-	padding: 4px 10px;
-	border: 1px solid #6ca12b;
+	padding: 4px 6px;
+	border: 1px solid transparent;
 	background-color: #000;
 	color: #fff;
 	border-radius: .2rem;
+	opacity: 0.7;
+	transition: opacity .5s;
+}
+
+button.tag:hover,
+button.tag:focus {
+	border: 1px solid #6ca12b;
+	opacity: 1;
 }
 
 button[type='submit'] {
@@ -97,6 +105,35 @@ button[type='submit']:hover {
   cursor: default !important;
 }
 
+button.like  {
+	display: inline-block;
+	height: 32px;
+	padding: 0 11px;
+	line-height: 30px;
+	border: 1px solid #d1d1d1;
+	border-radius: 4px;
+	color: #767676;
+	fill: currentColor;
+	font-size: 14px;
+	text-decoration: none;
+	text-align: center;
+	white-space: nowrap;
+	user-select: none;
+	-webkit-user-select: none;
+	transition: all .1s ease-in-out;
+}
+
+button.like.active {
+	border: 1px solid purple;
+	color: purple;
+}
+
+svg.like {
+	position: relative;
+	color: #767676;
+	width: 15px;
+}
+
 form {
   display: block;
 }
@@ -109,14 +146,20 @@ form {
 
 input[type='search'],
 input[type='text'] {
-  min-width: 250px;
+  width: 200px;
   margin: 2px;
   padding-top: 8px;
   padding-bottom: 8px;
 	padding-left: 30px;
   border: 1px solid transparent;
   color: #333;
+	/* transition: width .5s; */
 }
+
+/* input[type='search']:focus,
+input[type='text']:focus {
+	width: 250px;
+} */
 
 .search-box-icon {
   position: absolute;
@@ -125,8 +168,8 @@ input[type='text'] {
   top: 50%;
   left: 0%;
   transform: translateY(-50%);
-  -webkit-margin-start: 10px;
   margin-inline-start: 10px;
+  -webkit-margin-start: 10px;
   z-index: 1;
 }
 
