@@ -82,6 +82,12 @@ export default class App extends Component {
 		loadAlbums(this);
 	}
 
+	componentWillUnmount() {
+		this.state = {};
+		this.searchResults = null;
+		this.onClickLike = null;
+	}
+
 	searchResults(str) {
 		const { results } = this.state;
 		if (results.length > 0) {
@@ -201,7 +207,7 @@ export default class App extends Component {
 					</div>
 				)}
 				<footer className="footer p-3">
-					<h4 className="text-lightgrey">Music Search 2021</h4>
+					<h4 className="text-lightgrey">Powered by </h4>
 				</footer>
 			</div>
 		);
