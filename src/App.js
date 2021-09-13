@@ -83,7 +83,6 @@ export default class App extends Component {
 	}
 
 	componentWillUnmount() {
-		this.state = {};
 		this.searchResults = null;
 		this.onClickLike = null;
 	}
@@ -122,32 +121,34 @@ export default class App extends Component {
 	render() {
 		const { loading, filtered, faves } = this.state;
 		return (
-			<div className="container bg-light">
+			<div id="top" className="container bg-light">
 				<header className="header flex p-3">
 					<a href="./" className="home">
 						<h1 className="text-light">Music</h1>
 					</a>
 					<SearchBox searchResults={this.searchResults} />
+					<div className="trending">
+						{faves.length > 0 && (
+							<span className="text-light">Favourites</span>
+						)}
+						{faves.length > 0 && (
+							faves.map((item) => {
+								return (
+									<button key={item} className="tag"
+										onClick={(e) => {
+											e.preventDefault();
+											this.searchResults(item);
+										}}>
+										{item}
+									</button>
+								);
+							})
+						)}
+					</div>
 				</header>
 
-				<div className="trending pb-2 pl-3">
-					<span className="text-light">Favourites</span>
-					{faves.length > 0 && (
-						faves.map((item) => {
-							return (
-								<button key={item} className="tag"
-									onClick={(e) => {
-										e.preventDefault();
-										this.searchResults(item);
-									}}>
-									{item}
-								</button>
-							);
-						})
-					)}
-				</div>
-
 				{loading && <Spinner />}
+				{filtered.length === 0 && (<div className="content"></div>)}
 				{filtered.length > 0 && (
 					<div className="content flex">
 						{filtered.map((item) => {
@@ -206,8 +207,11 @@ export default class App extends Component {
 						})}
 					</div>
 				)}
-				<footer className="footer p-3">
-					<h4 className="text-lightgrey">Powered by </h4>
+
+				<footer className="footer p-2">
+					<a href="#top">
+						<h4 className="text-light text-center">back to top</h4>
+					</a>
 				</footer>
 			</div>
 		);

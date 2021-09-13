@@ -4,10 +4,6 @@
   box-sizing: border-box;
 }
 
-html, body {
-	height: 100%;
-}
-
 body {
   font-family: 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -188,9 +184,29 @@ input[type='text']:focus {
   background-color: #000;
 }
 
+.sticky-header {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 2;
+}
+
+.sticky-footer {
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	z-index: 3;
+	opacity: 0.5;
+}
+
+.sticky-header-margin {
+	margin-top: 70px;
+}
+
 .content {
   display: block;
   width: 100%;
+	min-height: 70vh;
 }
 
 .title {
