@@ -8,9 +8,10 @@ import "./styles/colours.css";
 import externalIcon from "./icons/external.svg";
 
 // components
-import SearchBox from "./components/SearchBox";
 import Spinner from "./components/Spinner";
+import SearchBox from "./components/SearchBox";
 import LikeIcon from "./components/LikeIcon";
+import Favourites from "./components/Favourites";
 
 function formatAlbumResults(obj) {
 	const entries = [];
@@ -72,9 +73,14 @@ export default class App extends Component {
 			results: [],
 			filtered: [],
 			faves: [],
+			mode: "artist",
 			loading: true,
 		};
-		this.searchResults = this.searchResults.bind(this);
+
+		this.runSearch = this.runSearch.bind(this);
+		this.searchArtist = this.searchArtist.bind(this);
+		this.searchTitle = this.searchTitle.bind(this);
+		this.searchGenre = this.searchGenre.bind(this);
 		this.onClickLike = this.onClickLike.bind(this);
 	}
 
@@ -82,27 +88,66 @@ export default class App extends Component {
 		loadAlbums(this);
 	}
 
-	componentWillUnmount() {
-		this.searchResults = null;
-		this.onClickLike = null;
+	// componentWillUnmount() {
+	// 	this.searchTitle = null;
+	// 	this.searchGenre = null;
+	// 	this.onClickLike = null;
+	// }
+
+	runSearch(str) {
+		const { results } = this.state;
+		if (str === "" || str.length < 2) {
+			this.setState({ filtered: results });
+			return;
+		}
+		switch (this.state.mode) {
+			case "artist":
+				this.searchArtist(str);
+				return;
+			case "title":
+				this.searchTitle(str);
+				return;
+			case "genre":
+				this.searchGenre(str);
+				return;
+			default:
+				break;
+		}
 	}
 
-	searchResults(str) {
+	searchArtist(str) {
 		const { results } = this.state;
 		if (results.length > 0) {
-			if (str === "" || str.length < 2) {
-				this.setState({ filtered: results });
-				return;
-			} else {
-				const arr = results.filter((r) =>
-					r.title.toLowerCase().includes(str.toLowerCase())
-				);
-				arr.length > 0
-					? this.setState({ filtered: arr })
-					: this.setState({ filtered: [] });
-			}
-		} else {
-			console.log("no search data available");
+			const arr = results.filter((r) =>
+				r.artist.label.toLowerCase().includes(str.toLowerCase())
+			);
+			arr.length > 0
+				? this.setState({ filtered: arr })
+				: this.setState({ filtered: [] });
+		}
+	}
+
+	searchTitle(str) {
+		const { results } = this.state;
+		if (results.length > 0) {
+			const arr = results.filter((r) =>
+				r.title.toLowerCase().includes(str.toLowerCase())
+			);
+			arr.length > 0
+				? this.setState({ filtered: arr })
+				: this.setState({ filtered: [] });
+		}
+	}
+
+	searchGenre(str) {
+		const { results } = this.state;
+		if (results.length > 0) {
+			const arr = results.filter((r) =>
+				r.category.toLowerCase().includes(str.toLowerCase())
+			);
+			arr.length > 0
+				? this.setState({ filtered: arr })
+				: this.setState({ filtered: [] });
 		}
 	}
 
@@ -119,36 +164,20 @@ export default class App extends Component {
 	}
 
 	render() {
-		const { loading, filtered, faves } = this.state;
+		const { loading, mode, filtered, faves } = this.state;
 		return (
 			<div id="top" className="container bg-light">
 				<header className="header flex p-3">
 					<a href="./" className="home">
 						<h1 className="text-light">Music</h1>
 					</a>
-					<SearchBox searchResults={this.searchResults} />
-					<div className="trending">
-						{faves.length > 0 && (
-							<span className="text-light">Favourites</span>
-						)}
-						{faves.length > 0 && (
-							faves.map((item) => {
-								return (
-									<button key={item} className="tag"
-										onClick={(e) => {
-											e.preventDefault();
-											this.searchResults(item);
-										}}>
-										{item}
-									</button>
-								);
-							})
-						)}
-					</div>
+					<SearchBox mode={mode} runSearch={this.runSearch} />
+					<Favourites faves={faves} runSearch={this.runSearch} />
 				</header>
 
 				{loading && <Spinner />}
-				{filtered.length === 0 && (<div className="content"></div>)}
+				{filtered.length === 0 && loading && (<div className="content"></div>)}
+				{filtered.length === 0 && !loading && (<div className="content">No matches found</div>)}
 				{filtered.length > 0 && (
 					<div className="content flex">
 						{filtered.map((item) => {
@@ -157,34 +186,22 @@ export default class App extends Component {
 									key={item.id}
 									className="card border-light bg-light mt-2 mb-2 ml-3 p-3"
 								>
-									<a href={item.link} className="external" rel="noreferrer" target="_blank">
-										<img
-											src={item.image2}
-											className="thumbnail rounded"
-											alt={item.name}
-										/>
-										<img
-											src={externalIcon}
-											className="icon-external"
-											alt="View on Apple Music store"
-										/>
+									<a href={item.link} className="external" rel="noreferrer" title="View on Apple Music" target="_blank">
+										<img src={item.image2} className="thumbnail rounded" alt={item.name} />
+										<img src={externalIcon} className="icon-external" alt="" />
 									</a>
 									<div className="card-header m-2 pb-2">
 										<h3 className="text-dark">{item.name}</h3>
 									</div>
-									<div className="m-2 pb-2">
-										<a href={item.artist.link} className="external" rel="noreferrer" target="_blank">
+									<div className="m-2">
+										<a href={item.artist.link} className="external" rel="noreferrer" title="View on Apple Music" target="_blank">
 											<h3 className="text-success">
 												{item.artist.label}
-												<img
-													src={externalIcon}
-													className="icon-external"
-													alt="View on Apple Music store"
-														/>
+												<img src={externalIcon} className="icon-external" alt="" />
 											</h3>
 										</a>
 									</div>
-									<div className="card-footer mt-2 pb-2">
+									<div className="card-footer mt-1 pb-2">
 										<div className="m-2">
 											<span className="text-midgrey">{item.category}</span>
 										</div>
@@ -209,9 +226,11 @@ export default class App extends Component {
 				)}
 
 				<footer className="footer p-2">
+					{filtered.length > 0 && (
 					<a href="#top">
 						<h4 className="text-light text-center">back to top</h4>
 					</a>
+					)}
 				</footer>
 			</div>
 		);

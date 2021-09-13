@@ -108,12 +108,10 @@ button[type='submit']:hover {
 button.like  {
 	display: inline-block;
 	height: 32px;
-	padding: 0 11px;
-	line-height: 30px;
+	padding: 0 10px;
 	border: 1px solid #d1d1d1;
 	border-radius: 4px;
 	color: #767676;
-	fill: currentColor;
 	font-size: 14px;
 	text-decoration: none;
 	text-align: center;
@@ -123,16 +121,16 @@ button.like  {
 	transition: all .1s ease-in-out;
 }
 
-button.like.active {
-	border: 1px solid purple;
-	color: purple;
-}
-
-svg.like {
+button.like svg {
 	position: relative;
 	color: #767676;
 	width: 15px;
 }
+
+button.like.active svg {
+	color: fuchsia;
+}
+
 
 form {
   display: block;
@@ -178,7 +176,7 @@ input[type='text']:focus {
   width: 100%;
 }
 
-.header, .footer, .trending {
+.header, .footer, .faves {
   display: block;
   width: 100%;
   background-color: #000;

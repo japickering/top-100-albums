@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SearchIcon from "./SearchIcon";
 
-export default function SearchBox({ searchResults }) {
+export default function SearchBox({ mode, runSearch }) {
 	const [search, setSearch] = useState("");
 
 	return (
@@ -10,7 +10,7 @@ export default function SearchBox({ searchResults }) {
 			<input
 				type="search"
 				className="search corners"
-				placeholder="Search albums.."
+				placeholder={"Search by " + mode}
 				aria-autocomplete="none"
 				aria-multiline="false"
 				autoComplete="off"
@@ -24,7 +24,7 @@ export default function SearchBox({ searchResults }) {
 				className="btn-success p-2"
 				onClick={(e) => {
 					e.preventDefault();
-					searchResults(search);
+					runSearch(search);
 				}}
 			>
 				Search

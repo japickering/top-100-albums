@@ -4,8 +4,3 @@
 	height: 100px;
 	text-align: center;
 }
-
-svg path,
-svg rect {
-	fill: #0eb942;
-}
