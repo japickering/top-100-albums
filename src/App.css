@@ -159,6 +159,13 @@ input[type='text']:focus {
 	width: 250px;
 } */
 
+.icon-external {
+	display: none;
+	margin: 0px 0px 0px 8px;
+	width: 18px;
+	height: 18px;
+}
+
 .search-box-icon {
   position: absolute;
   width: 16px;

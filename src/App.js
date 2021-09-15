@@ -5,11 +5,10 @@ import "./styles/layout.css";
 import "./styles/card.css";
 import "./styles/colours.css";
 
-import externalIcon from "./icons/external.svg";
-
 // components
 import Spinner from "./components/Spinner";
 import SearchBox from "./components/SearchBox";
+import ExternalIcon from "./components/ExternalIcon";
 import LikeIcon from "./components/LikeIcon";
 import Favourites from "./components/Favourites";
 
@@ -154,7 +153,7 @@ export default class App extends Component {
 	onClickLike(e, label) {
 		e.preventDefault();
 		const tmp = this.state.faves;
-		if(!this.state.faves.includes(label)) {
+		if(!tmp.includes(label)) {
 			tmp.push(label);
 			tmp.sort();
 			this.setState({ faves: tmp })
@@ -188,7 +187,7 @@ export default class App extends Component {
 								>
 									<a href={item.link} className="external" rel="noreferrer" title="View on Apple Music" target="_blank">
 										<img src={item.image2} className="thumbnail rounded" alt={item.name} />
-										<img src={externalIcon} className="icon-external" alt="" />
+										<ExternalIcon />
 									</a>
 									<div className="card-header m-2 pb-2">
 										<h3 className="text-dark">{item.name}</h3>
@@ -197,7 +196,7 @@ export default class App extends Component {
 										<a href={item.artist.link} className="external" rel="noreferrer" title="View on Apple Music" target="_blank">
 											<h3 className="text-success">
 												{item.artist.label}
-												<img src={externalIcon} className="icon-external" alt="" />
+												<ExternalIcon />
 											</h3>
 										</a>
 									</div>
@@ -212,7 +211,7 @@ export default class App extends Component {
 										<div className="m-2">
 											<button
 												key={item}
-												className={this.state.faves.includes(item.artist.label) ? "like active" : "like" }
+												className={faves.includes(item.artist.label) ? "like active" : "like" }
 												onClick={(e) => this.onClickLike(e, item.artist.label)}
 											>
 												<LikeIcon />

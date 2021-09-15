@@ -19,13 +19,6 @@
   opacity: 0.7;
 }
 
-.icon-external {
-	display: none;
-	margin: 0px 0px 0px 8px;
-	width: 18px;
-	height: 18px;
-}
-
 .card .external:hover .icon-external,
 .card .external:hover .icon-external {
 	display: inline-block;
