@@ -109,9 +109,8 @@ button.like  {
 	display: inline-block;
 	height: 32px;
 	padding: 0 10px;
-	border: 1px solid #d1d1d1;
+	border: 1px solid transparent;
 	border-radius: 4px;
-	color: #767676;
 	font-size: 14px;
 	text-decoration: none;
 	text-align: center;
@@ -121,14 +120,21 @@ button.like  {
 	transition: all .1s ease-in-out;
 }
 
-button.like svg {
+button.like.active {
+	border: 1px solid rgb(172, 26, 172);
+}
+
+button.like svg  {
 	position: relative;
-	color: #767676;
 	width: 15px;
 }
 
-button.like.active svg {
-	color: fuchsia;
+button.like svg path {
+	fill: #767676;
+}
+
+button.like.active svg path {
+	fill: rgb(172, 26, 172);
 }
 
 
