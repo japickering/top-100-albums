@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Favourites({ faves, runSearch }) {
 	return (
-		<div className="faves">
+		<nav className="faves">
 			{faves.length > 0 && <span className="text-light">Favourites</span>}
 			{faves.length > 0 &&
 				faves.map((item) => {
@@ -16,6 +16,6 @@ export default function Favourites({ faves, runSearch }) {
 						</button>
 					);
 				})}
-		</div>
+		</nav>
 	);
 }

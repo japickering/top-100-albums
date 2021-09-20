@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { API_URL } from "./config";
-import "./App.css";
+import "./globals.css";
 import "./styles/layout.css";
 import "./styles/card.css";
 import "./styles/colours.css";
@@ -36,8 +36,8 @@ function formatAlbumResults(obj) {
 			image: el["im:image"][0].label,
 			image1: el["im:image"][1].label,
 			image2: el["im:image"][2].label,
-			amount: el["im:price"].attributes.amount,
-			currency: el["im:price"].attributes.currency,
+			// amount: el["im:price"].attributes.amount,
+			// currency: el["im:price"].attributes.currency,
 		});
 	}
 	return entries;
@@ -52,7 +52,7 @@ async function loadAlbums(context) {
 		// if (Object.hasOwnProperty.call(json, key)) {
 		const outer = json[key];
 		entry = outer.entry;
-		console.log(entry);
+		// console.log(entry);
 		const results = formatAlbumResults(entry);
 
 		context.setState({
@@ -86,12 +86,6 @@ export default class App extends Component {
 	componentDidMount() {
 		loadAlbums(this);
 	}
-
-	// componentWillUnmount() {
-	// 	this.searchTitle = null;
-	// 	this.searchGenre = null;
-	// 	this.onClickLike = null;
-	// }
 
 	runSearch(str) {
 		const { results } = this.state;
@@ -172,6 +166,11 @@ export default class App extends Component {
 					</a>
 					<SearchBox mode={mode} runSearch={this.runSearch} />
 					<Favourites faves={faves} runSearch={this.runSearch} />
+					{process.env.NODE_ENV === 'development' && (
+						<div className="debug text-midgrey">
+							{process.env.REACT_APP_DEV_MODE}
+						</div>
+					)}
 				</header>
 
 				{loading && <Spinner />}
