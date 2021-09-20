@@ -2,7 +2,7 @@
 
 This React project is a demo application I developed in September 2021 for Ampersand's technical test as part of my job application with them.
 
-They use [CodeSubmit.io](https://codesubmit.io/) to accept Git push commands to a private code repository similar to Gitlab until you click the submit button to submit your final entry which puts the repo into a code freeze. After this further patches are impossible. The rest of this readme is the information Ampersand included.
+They use [CodeSubmit.io](https://codesubmit.io/) to accept `git push` commands to a private code repository similar to Gitlab until you click the submit button to submit your final entry which puts the repo into a code freeze. After this further patches are impossible. The rest of this readme is the information Ampersand included.
 
 ### Project Specification
 
