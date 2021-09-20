@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { API_URL } from "./config";
+import formatResults from "./formatResults";
+
 import "./globals.css";
 import "./styles/layout.css";
 import "./styles/card.css";
@@ -12,38 +14,7 @@ import ExternalIcon from "./components/ExternalIcon";
 import LikeIcon from "./components/LikeIcon";
 import Favourites from "./components/Favourites";
 
-function formatAlbumResults(obj) {
-	const entries = [];
-
-	for (const key in obj) {
-		const el = obj[key];
-		// check artist link exists
-		let link =
-			el["im:artist"].hasOwnProperty("attributes") === true
-				? el["im:artist"].attributes["href"]
-				: "./";
-
-		entries.push({
-			id: el.id.attributes["im:id"],
-			link: el.id.label,
-			title: el.title.label,
-			name: el["im:name"].label,
-			artist: { label: el["im:artist"].label, link: link },
-			category: el.category.attributes.label,
-			rights: el.rights.label,
-			releaseDate: el["im:releaseDate"].attributes.label,
-			datestamp: el["im:releaseDate"].label,
-			image: el["im:image"][0].label,
-			image1: el["im:image"][1].label,
-			image2: el["im:image"][2].label,
-			// amount: el["im:price"].attributes.amount,
-			// currency: el["im:price"].attributes.currency,
-		});
-	}
-	return entries;
-}
-
-async function loadAlbums(context) {
+async function loadAlbums(self) {
 	const response = await fetch(API_URL);
 	const json = await response.json();
 	let entry = {};
@@ -52,10 +23,10 @@ async function loadAlbums(context) {
 		// if (Object.hasOwnProperty.call(json, key)) {
 		const outer = json[key];
 		entry = outer.entry;
-		// console.log(entry);
-		const results = formatAlbumResults(entry);
+		// console.log('entry: ', entry);
+		const results = formatResults(entry);
 
-		context.setState({
+		self.setState({
 			results: results,
 			filtered: results,
 			loading: false,

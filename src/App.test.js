@@ -1,29 +1,26 @@
 import { render } from "@testing-library/react";
+// import { API_URL } from "./config";
+import data from "./data.json";
 import App from "./App";
-import { API_URL } from "./config";
-
-// Mock API data
-const results = [
-	{ title: { label: "aliyah" } },
-	{ title: { label: "fun lovin criminals" } },
-	{ title: { label: "metallica live" } },
-];
-
-function searchResults(str, results) {
-	return results.filter((r) => r.title.label.includes(str));
-}
+import formatResults from "./formatResults";
 
 test("renders app", () => {
 	render(<App />);
 });
 
-test("can call API with a successful response data", () => {
-	fetch(API_URL).then((res) => {
-		expect(res).toBeDefined();
-	});
-});
+// test("API returns response data", () => {
+// 	fetch(API_URL).then((res) => {
+// 		expect(res).toBeDefined();
+// 	});
+// });
 
-test("can run a search by title", () => {
-	const res = searchResults("aliyah", results);
-	expect(res).toBeDefined();
+test("formatResults returns album metadata", () => {
+	const res = formatResults(data);
+	expect(res[0].artist).toBeDefined();
+	expect(res[0].link).toBeDefined();
+	expect(res[0].title).toBeDefined();
+	expect(res[0].name).toBeDefined();
+	expect(res[0].category).toBeDefined();
+	expect(res[0].releaseDate).toBeDefined();
+	expect(res[0].image).toBeDefined();
 });
