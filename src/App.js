@@ -48,9 +48,6 @@ export default class App extends Component {
 		};
 
 		this.runSearch = this.runSearch.bind(this);
-		this.searchArtist = this.searchArtist.bind(this);
-		this.searchTitle = this.searchTitle.bind(this);
-		this.searchGenre = this.searchGenre.bind(this);
 		this.onClickLike = this.onClickLike.bind(this);
 	}
 
@@ -59,56 +56,36 @@ export default class App extends Component {
 	}
 
 	runSearch(str) {
-		const { results } = this.state;
+		const { results, mode } = this.state;
+
+		// if search query is invalid then reset search results
 		if (str === "" || str.length < 2) {
 			this.setState({ filtered: results });
 			return;
 		}
-		switch (this.state.mode) {
-			case "artist":
-				this.searchArtist(str);
-				return;
-			case "title":
-				this.searchTitle(str);
-				return;
-			case "genre":
-				this.searchGenre(str);
-				return;
-			default:
-				break;
-		}
-	}
 
-	searchArtist(str) {
-		const { results } = this.state;
 		if (results.length > 0) {
-			const arr = results.filter((r) =>
-				r.artist.label.toLowerCase().includes(str.toLowerCase())
-			);
-			arr.length > 0
-				? this.setState({ filtered: arr })
-				: this.setState({ filtered: [] });
-		}
-	}
-
-	searchTitle(str) {
-		const { results } = this.state;
-		if (results.length > 0) {
-			const arr = results.filter((r) =>
-				r.title.toLowerCase().includes(str.toLowerCase())
-			);
-			arr.length > 0
-				? this.setState({ filtered: arr })
-				: this.setState({ filtered: [] });
-		}
-	}
-
-	searchGenre(str) {
-		const { results } = this.state;
-		if (results.length > 0) {
-			const arr = results.filter((r) =>
-				r.category.toLowerCase().includes(str.toLowerCase())
-			);
+			// filter results based on mode
+			let arr = [];
+			switch (mode) {
+				case "artist":
+					arr = results.filter((r) =>
+						r.artist.label.toLowerCase().includes(str.toLowerCase())
+					);
+					break;
+				case "title":
+					arr = results.filter((r) =>
+						r.title.toLowerCase().includes(str.toLowerCase())
+					);
+					break;
+				case "genre":
+					arr = results.filter((r) =>
+						r.category.toLowerCase().includes(str.toLowerCase())
+					);
+					break;
+				default:
+					break;
+			}
 			arr.length > 0
 				? this.setState({ filtered: arr })
 				: this.setState({ filtered: [] });
