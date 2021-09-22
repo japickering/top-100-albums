@@ -14,6 +14,22 @@ import ExternalIcon from "./components/ExternalIcon";
 import LikeIcon from "./components/LikeIcon";
 import Favourites from "./components/Favourites";
 
+// capture window scrolling
+const scrollMin = 300;
+let scrollY = 0;
+
+function onWindowScroll() {
+	scrollY = window.scrollY;
+	console.log("scrollY:", scrollY);
+
+	if (scrollY >= scrollMin) {
+		document.querySelector('#footer').classList.remove('hide');
+	} else {
+		document.querySelector('#footer').classList.add('hide');
+	}
+}
+window.addEventListener('scroll', onWindowScroll, false);
+
 async function loadAlbums(self) {
 	const response = await fetch(API_URL);
 	const json = await response.json();
@@ -45,6 +61,7 @@ export default class App extends Component {
 			faves: [],
 			mode: "artist",
 			loading: true,
+			scrollMin: 200
 		};
 
 		this.runSearch = this.runSearch.bind(this);
@@ -171,12 +188,10 @@ export default class App extends Component {
 					</div>
 				)}
 
-				<footer className="footer p-2">
-					{filtered.length > 0 && (
+				<footer id="footer" className="footer sticky-footer p-2">
 					<a href="#top">
 						<h4 className="text-light text-center">back to top</h4>
 					</a>
-					)}
 				</footer>
 			</div>
 		);
