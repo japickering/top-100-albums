@@ -229,8 +229,12 @@ input[type='text']:focus {
 
 .sticky-footer {
 	position: fixed;
+	width: auto;
 	bottom: 0px;
-	left: 0px;
+	right: 0px;
+	padding: 5px 10px;
+	border-top-left-radius: .4rem;
+	border-top-right-radius: .4rem;
 	z-index: 3;
 	opacity: 1;
 	animation: fadein 1s linear;

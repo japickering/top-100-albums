@@ -192,10 +192,10 @@ export default class App extends Component {
 					</div>
 				)}
 
-				<footer id="footer" className="footer sticky-footer text-right p-1">
+				<footer id="footer" className="footer sticky-footer">
 					<a href="#top">
 						<h4 className="inline-block text-light">back to top</h4>
-						<span className="inline-block m-1 arrow-up"></span>
+						<span className="inline-block ml-1 arrow-up"></span>
 					</a>
 				</footer>
 			</div>
