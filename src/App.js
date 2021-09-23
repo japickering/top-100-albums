@@ -131,11 +131,11 @@ export default class App extends Component {
 					</a>
 					<SearchBox mode={mode} runSearch={this.runSearch} />
 					<Favourites faves={faves} runSearch={this.runSearch} />
-					{process.env.NODE_ENV === 'development' && (
+					{/* {process.env.NODE_ENV === 'development' && (
 						<div className="debug text-midgrey">
 							{process.env.REACT_APP_DEV_MODE}
 						</div>
-					)}
+					)} */}
 				</header>
 
 				{loading && <Spinner />}

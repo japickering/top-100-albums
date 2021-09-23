@@ -17,7 +17,10 @@ export default function SearchBox({ mode, runSearch }) {
 				autoCorrect="off"
 				spellCheck="false"
 				value={search}
-				onChange={(e) => setSearch(e.target.value) }
+				onChange={(e) => {
+					setSearch(e.target.value);
+					runSearch(search);
+				}}
 			/>
 			<button
 				type="submit"
