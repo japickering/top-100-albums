@@ -9,14 +9,14 @@
 
 .card .thumbnail {
   max-width: 170px;
-	border: 1px solid transparent;
-  opacity: 1;
-	transition: opacity .5s;
+	border: 2px solid transparent;
+	opacity: 1;
 }
 
 .card .thumbnail:hover,
 .card .thumbnail:focus {
-  opacity: 0.7;
+	border: 2px solid var(--dark);
+	animation: fadein .5s linear;
 }
 
 .card .external:hover .icon-external,
@@ -27,7 +27,7 @@
 .card .badge {
   display: inline-block;
   min-width: 120px;
-  background-color: #abc;
+  background-color: var(--light-gray);
   color: #fff;
   padding: .3rem;
   border-radius: .3rem;
@@ -35,11 +35,11 @@
 }
 
 .card-header {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid var(--hrule);
 }
 
 /* .card-footer {
-  border-top: 1px solid #ccc;
+  border-top: 1px solid var(--hrule);
 } */
 
 @media screen and (max-width: 600px) {

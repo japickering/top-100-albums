@@ -72,6 +72,10 @@ export default class App extends Component {
 		loadAlbums(this);
 	}
 
+	componentWillUnmount() {
+		window.removeEventListener('scroll', onWindowScroll);
+	}
+
 	runSearch(str) {
 		const { results, mode } = this.state;
 
@@ -188,9 +192,10 @@ export default class App extends Component {
 					</div>
 				)}
 
-				<footer id="footer" className="footer sticky-footer p-2">
+				<footer id="footer" className="footer sticky-footer text-right p-1">
 					<a href="#top">
-						<h4 className="text-light text-center">back to top</h4>
+						<h4 className="inline-block text-light">back to top</h4>
+						<span className="inline-block m-1 arrow-up"></span>
 					</a>
 				</footer>
 			</div>

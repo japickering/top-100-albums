@@ -7,48 +7,48 @@
 }
 
 .bg-light {
-  background-color: #fff;
+  background-color: var(--light);
 }
 
 .bg-lightgrey {
-  background-color: #aaa;
+  background-color: var(--lightgrey);
 }
 
 .bg-midgrey {
-  background-color: #888;
+  background-color: var(--midgrey);
 }
 
 .bg-dark {
-  background-color: #333;
+  background-color: var(--dark);
 }
 
 .btn-success {
-  background-color: #3cb46e;
-  color: #fff;
+  background-color: var(--submit);
+  color: var(--light);
 }
 
 .text-dark {
-  color: #333;
+  color: var(--dark);
 }
 
 .text-light {
-  color: #fff;
+  color: var(--light);
 }
 
 .text-darkgrey {
-  color: #666;
+  color: var(--darkgrey);
 }
 
 .text-midgrey {
-  color: #888;
+  color: var(--midgrey);
 }
 
 .text-lightgrey {
-  color: #a2a2a2;
+  color: var(--lightgrey);
 }
 
 .text-success {
-  color: #3cb46e;
+  color: var(--submit);
 }
 
 .border {

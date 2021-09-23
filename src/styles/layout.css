@@ -16,6 +16,10 @@
   flex-direction: column;
 }
 
+.inline-block {
+	display: inline-block;
+}
+
 .align-left, .left {
   float: left;
 }
